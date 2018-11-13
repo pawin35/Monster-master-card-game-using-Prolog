@@ -1,4 +1,4 @@
-consult('c:\\card.pl').
+consult('card.pl').
 %helper function
 %Syntax delete(X,List,Ans)
 delete(X, [], []).
@@ -7,7 +7,6 @@ delete(X,[H|T], [H|S]) :- X\==H, delete(X,T,S).
 %syntax isin(X,List)
 isin(X,[X|T]).
 isin(X,[H|T]) :- X\==H, isin(X,T).
-
 
 %length2(List,N): returns true when the number of data in list List is N.
 length2([], 0).
@@ -287,10 +286,13 @@ Dif is Oppdef - Atk,
 %write(Dif), nl,
 decrease_life(Player, Dif).
 
-
+battle_outer(Player) :-
+\+ fieldcard(Player, Monster, attack),
+writeln('You don\'t have a monster that can attack on the field.').
 
 battle_outer(Player) :-
-writeln('Please assign target for your monster'),
+fieldcard(Player, Monster, attack),
+ writeln('Please assign target for your monster'),
 field(Player, Field),
 battle_inner(Player, Field).
 
