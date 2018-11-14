@@ -52,6 +52,11 @@ field(2, []).
 
 
 %phase function
+%next phase
+next(Player, Next) :- 
+Next is (Player mod 2) + 1,
+format('Switching turn to Player ~d~n', [Next]).
+
 %decrease life
 decrease_life(Player, N) :-
 life(Player, Old),
@@ -362,6 +367,5 @@ draw(Player),
 place_monster(Player),
 set_mode_main(Player),
 battle_outer(Player),
-Next is (Player mod 2) + 1,
-format('Switching turn to Player ~d~n', [Next]),
+next(Player, Next),
 play(Next).
